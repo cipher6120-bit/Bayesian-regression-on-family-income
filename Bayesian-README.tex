@@ -1,0 +1,826 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Bayesian regression on poverty income ratio},
+  pdfauthor={Lui Yiu Wa},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Bayesian regression on poverty income ratio}
+\author{Lui Yiu Wa}
+\date{2026-01-06}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}\label{introduction}
+
+The data used in this analysis comes from the National Health and
+Nutrition Examination Survey (NHANES) conducted in August 2021 to August
+2023.
+
+This project aims to run a regression to model how demographic features
+affect the family monthly poverty income ratio which is ``the ratio of
+monthly family income to the HHS poverty guidelines specific to family
+size'' (cited from NHANES). Specfically it aims to model the household
+reference person's education, gender and education's effects on the ,
+adjusted for the number of people in the household.
+
+Disclaimer: I self taught most of this and there is still an ocean of
+things to learn, so if you spot any error along the way that's probably
+the reason. With that in mind, we shall begin!
+
+\section{Loading the libraries and the
+data}\label{loading-the-libraries-and-the-data}
+
+We first load the required libraries
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(haven)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(mice)}
+\FunctionTok{library}\NormalTok{(miceadds)}
+\FunctionTok{library}\NormalTok{(brms)}
+\FunctionTok{library}\NormalTok{(posterior)}
+\FunctionTok{library}\NormalTok{(bayestestR)}
+\FunctionTok{library}\NormalTok{(broom.mixed)}
+\FunctionTok{library}\NormalTok{(bayesplot)}
+\end{Highlighting}
+\end{Shaded}
+
+And then we can load our data and join them accordingly
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{demographic }\OtherTok{\textless{}{-}} \FunctionTok{read\_xpt}\NormalTok{(}\StringTok{"DEMO\_L.xpt"}\NormalTok{)}
+
+\NormalTok{income }\OtherTok{\textless{}{-}} \FunctionTok{read\_xpt}\NormalTok{(}\StringTok{"INQ\_L.xpt"}\NormalTok{)}
+
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{inner\_join}\NormalTok{(demographic, income)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining with `by = join_by(SEQN)`
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}
+ \AttributeTok{ID =}\NormalTok{ SEQN,}
+ \AttributeTok{num\_ppl =}\NormalTok{ DMDHHSIZ,}
+ \AttributeTok{HH\_gender =}\NormalTok{ DMDHRGND,}
+ \AttributeTok{HH\_age =}\NormalTok{ DMDHRAGZ,}
+ \AttributeTok{HH\_edu =}\NormalTok{ DMDHREDZ,}
+ \AttributeTok{poverty\_index =}\NormalTok{ INDFMMPI}
+\NormalTok{)}
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}
+  \AttributeTok{HH\_gender =} \FunctionTok{as.factor}\NormalTok{(HH\_gender),}
+  \AttributeTok{HH\_edu =} \FunctionTok{as.factor}\NormalTok{(HH\_edu)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We then check the presence of missing data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ini }\OtherTok{\textless{}{-}} \FunctionTok{mice}\NormalTok{(df, }\AttributeTok{maxit =} \DecValTok{0}\NormalTok{)}
+\NormalTok{ini}\SpecialCharTok{$}\NormalTok{nmis}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            ID       num_ppl     HH_gender        HH_age        HH_edu 
+##             0             0          7818          7809          8187 
+## poverty_index 
+##          2944
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{md.pattern}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Bayesian-README_files/figure-latex/unnamed-chunk-3-1.pdf}}
+
+\begin{verbatim}
+##      ID num_ppl poverty_index HH_age HH_gender HH_edu      
+## 3012  1       1             1      1         1      1     0
+## 76    1       1             1      1         1      0     1
+## 7     1       1             1      1         0      1     1
+## 5894  1       1             1      0         0      0     3
+## 727   1       1             0      1         1      1     1
+## 300   1       1             0      1         1      0     2
+## 2     1       1             0      1         0      0     3
+## 1915  1       1             0      0         0      0     4
+##       0       0          2944   7809      7818   8187 26758
+\end{verbatim}
+
+And of course there is missing data, can't have it too easy!
+
+Now, with missing data, we have 2 popular approaches, multiple
+imputation and complete case analysis, if we can assume a ``Missing at
+Random'' (MAR) structure to the missingness, multiple imputation should
+be favored as it can avoid bias in our modeling and discarding
+infromation unlike complete case analysis.
+
+So, let us boldly assume MAR for a second (we will come back to this)
+and let's perform a multiple imputation to our data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{(}\ConstantTok{FALSE}\NormalTok{)\{}
+\NormalTok{df\_imp }\OtherTok{\textless{}{-}} \FunctionTok{futuremice}\NormalTok{(df, }\AttributeTok{m =} \DecValTok{20}\NormalTok{, }\AttributeTok{parallelseed =} \DecValTok{555}\NormalTok{, }\AttributeTok{method =} \StringTok{"rf"}\NormalTok{, }
+                     \AttributeTok{maxit =} \DecValTok{10}\NormalTok{, }\AttributeTok{ntree =} \DecValTok{25}\NormalTok{, }
+                     \AttributeTok{verbose =}\NormalTok{ T, }\AttributeTok{n.core =} \DecValTok{14}\NormalTok{)}
+\FunctionTok{saveRDS}\NormalTok{(df\_imp, }\StringTok{"imputed\_data.RDS"}\NormalTok{)}
+\NormalTok{\}}
+
+\NormalTok{df\_imp }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{"imputed\_data.RDS"}\NormalTok{)}
+
+\NormalTok{complete\_df }\OtherTok{\textless{}{-}} \FunctionTok{complete}\NormalTok{(df\_imp, }\StringTok{"long"}\NormalTok{, }\AttributeTok{include =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+We can compare the distributions of the poverty\_index before and after
+the imputations as a crude test to see if the imputed values are very
+off
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(complete\_df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ poverty\_index)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \FloatTok{0.1}\NormalTok{, }\AttributeTok{fill =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Distribution of Poverty Index"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Poverty Index"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Frequency"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Bayesian-README_files/figure-latex/unnamed-chunk-5-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ poverty\_index)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \FloatTok{0.1}\NormalTok{, }\AttributeTok{fill =} \StringTok{"red"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Distribution of Poverty Index (Original Data)"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Poverty Index"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Frequency"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Bayesian-README_files/figure-latex/unnamed-chunk-5-2.pdf}}
+
+It looks good! And it is also a good time to discuss the model we will
+be using for this analysis. As you can see, the distribution of
+poverty\_index is highly irregular, NHANES censored all data points
+beyond the value of 5, and obviously, a ratio cannot drop below 0, so we
+see there are 2 point masses at 0 and 5. It seems reasonable to me to
+model this weird distribution (with a scaling) with a zero one inflated
+beta model which works as following:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Each data point has a probability π to be at the point masses (i.e.~0
+  or 1), this probability is called the ``Zero-One inflated part''
+  (zoi).
+\item
+  If the data point is at one of the point masses, it has a probability
+  λ to be exactly 1, this is called the ``Conditional-One inflated
+  part'' (coi).
+\item
+  If the data point is NOT at the point masses, then it follows a beta
+  distribution with location and scaling parameters (μ, φ).
+\end{enumerate}
+
+So before we proceed, we should scale our dataset accordingly
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{complete\_df }\OtherTok{\textless{}{-}}\NormalTok{ complete\_df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}
+  \AttributeTok{poverty\_index\_scaled =}\NormalTok{ poverty\_index }\SpecialCharTok{/} \DecValTok{5}\NormalTok{,}
+  \AttributeTok{HH\_edu =} \FunctionTok{as.factor}\NormalTok{(HH\_edu),}
+  \AttributeTok{HH\_gender =} \FunctionTok{as.factor}\NormalTok{(HH\_gender)}
+  \CommentTok{\#doing as.factor() again just to be sure, I messed up once}
+\NormalTok{)}
+
+\NormalTok{complete\_df }\OtherTok{\textless{}{-}} \FunctionTok{as.mids}\NormalTok{(complete\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Model fitting using Hamiltonian Monte
+Carlo}\label{model-fitting-using-hamiltonian-monte-carlo}
+
+We can now start to define our models for brms to compile into Stan/C++
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{formulas }\OtherTok{\textless{}{-}} \FunctionTok{bf}\NormalTok{(poverty\_index\_scaled }\SpecialCharTok{\textasciitilde{}}\NormalTok{ num\_ppl }\SpecialCharTok{+} 
+\NormalTok{                 HH\_gender }\SpecialCharTok{+}\NormalTok{ HH\_age }\SpecialCharTok{+}\NormalTok{ HH\_edu,}
+\NormalTok{               phi }\SpecialCharTok{\textasciitilde{}}\NormalTok{ num\_ppl }\SpecialCharTok{+}\NormalTok{ HH\_gender }\SpecialCharTok{+}\NormalTok{ HH\_age }\SpecialCharTok{+}\NormalTok{ HH\_edu,}
+\NormalTok{               zoi }\SpecialCharTok{\textasciitilde{}}\NormalTok{ num\_ppl }\SpecialCharTok{+}\NormalTok{ HH\_gender }\SpecialCharTok{+}\NormalTok{ HH\_age }\SpecialCharTok{+}\NormalTok{ HH\_edu,}
+\NormalTok{               coi }\SpecialCharTok{\textasciitilde{}}\NormalTok{ num\_ppl }\SpecialCharTok{+}\NormalTok{ HH\_gender }\SpecialCharTok{+}\NormalTok{ HH\_age }\SpecialCharTok{+}\NormalTok{ HH\_edu}
+\NormalTok{               )}
+\ControlFlowTok{if}\NormalTok{(}\ConstantTok{FALSE}\NormalTok{)\{}
+\NormalTok{imp\_fit }\OtherTok{\textless{}{-}} \FunctionTok{brm\_multiple}\NormalTok{(formulas, }\AttributeTok{data =}\NormalTok{ complete\_df,}
+                       \AttributeTok{family =} \FunctionTok{zero\_one\_inflated\_beta}\NormalTok{(),}
+                        \AttributeTok{chains =} \DecValTok{4}\NormalTok{, }\AttributeTok{iter =} \DecValTok{2000}\NormalTok{, }\AttributeTok{cores =} \DecValTok{4}\NormalTok{,}
+                        \AttributeTok{seed =} \DecValTok{555}\NormalTok{)}
+                        
+
+\CommentTok{\#The old gods have forsaken these chains. }
+\CommentTok{\#The frogs are leaping and leaping and leaping and leaping... }
+\CommentTok{\#All they have got is the remembrance of the conjugate priors. }
+\CommentTok{\#The Hamiltonian paths of the spheres tumbling down }
+\CommentTok{\#the wicked hills of the Log{-}posterior{-}Stan}
+\CommentTok{\#fluttering in numerical fluctuations.}
+\CommentTok{\#All is lost, all is lost...}
+
+\FunctionTok{saveRDS}\NormalTok{(imp\_fit, }\StringTok{"impfit.RDS"}\NormalTok{)}
+\NormalTok{          \}}
+
+\NormalTok{imp\_fit }\OtherTok{\textless{}{-}} \FunctionTok{read\_rds}\NormalTok{(}\StringTok{"impfit.RDS"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+After the excruciating Hamiltonian physics fueled black magic, we need
+to perform some diagnostics to ensure that the chains have indeed
+converged and we have enough valid samples to move forward. We need some
+careful handling here because the naive diagnostics will make no sense
+with our model fitted on multiply imputed datasets.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#The following code is modified}
+\CommentTok{\#from the code given in brms documentation}
+
+\NormalTok{draws }\OtherTok{\textless{}{-}} \FunctionTok{as\_draws\_array}\NormalTok{(imp\_fit)}
+\NormalTok{m }\OtherTok{\textless{}{-}} \DecValTok{20}
+
+\NormalTok{draws\_per\_dat }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{m, \textbackslash{}(i) }\FunctionTok{subset\_draws}\NormalTok{(draws, }\AttributeTok{chain =}\NormalTok{ i))}
+\NormalTok{fit\_check }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(draws\_per\_dat, summarise\_draws, }\FunctionTok{default\_convergence\_measures}\NormalTok{())}
+
+\NormalTok{problematic\_list }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(fit\_check)) \{}
+\NormalTok{  problematic\_rows }\OtherTok{\textless{}{-}}\NormalTok{ fit\_check[[i]] }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{filter}\NormalTok{(rhat }\SpecialCharTok{\textgreater{}} \FloatTok{1.01} \SpecialCharTok{|}\NormalTok{ ess\_bulk }\SpecialCharTok{\textless{}} \DecValTok{400} \SpecialCharTok{|}\NormalTok{ ess\_tail }\SpecialCharTok{\textless{}} \DecValTok{400}\NormalTok{)}
+  
+  \ControlFlowTok{if}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(problematic\_rows) }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{) \{}
+\NormalTok{    problematic\_list[[}\FunctionTok{paste0}\NormalTok{(}\StringTok{"dataset\_"}\NormalTok{, i)]] }\OtherTok{\textless{}{-}}\NormalTok{ problematic\_rows }\SpecialCharTok{\%\textgreater{}\%}
+      \FunctionTok{mutate}\NormalTok{(}\AttributeTok{dataset =}\NormalTok{ i) }\SpecialCharTok{\%\textgreater{}\%}
+      \FunctionTok{select}\NormalTok{(dataset, }\FunctionTok{everything}\NormalTok{())}
+\NormalTok{  \}}
+\NormalTok{\}}
+
+\NormalTok{all\_problematic }\OtherTok{\textless{}{-}} \FunctionTok{bind\_rows}\NormalTok{(problematic\_list)}
+
+\ControlFlowTok{if}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(all\_problematic) }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{) \{}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"Found"}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(all\_problematic), }\StringTok{"problematic parameters across"}\NormalTok{, }
+      \FunctionTok{length}\NormalTok{(problematic\_list), }\StringTok{"datasets:}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \FunctionTok{print}\NormalTok{(all\_problematic, }\AttributeTok{n =} \FunctionTok{nrow}\NormalTok{(all\_problematic))}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"No problematic parameters found in any dataset }
+\StringTok{      (using criteria: rhat \textgreater{} 1.01 or ess\_bulk \textless{} 400 or ess\_tail \textless{} 400).}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Found 15 problematic parameters across 11 datasets:
+## 
+## # A tibble: 15 x 5
+##    dataset variable          rhat ess_bulk ess_tail
+##      <int> <chr>            <dbl>    <dbl>    <dbl>
+##  1       1 lp__              1.00     360.     757.
+##  2       3 b_phi_HH_gender2  1.01    1897.     856.
+##  3       3 b_coi_HH_age      1.02    1429.     533.
+##  4       3 lp__              1.01     313.     647.
+##  5       4 lp__              1.00     368.     695.
+##  6       6 lp__              1.00     281.     739.
+##  7       7 lp__              1.01     345.     478.
+##  8       9 b_phi_num_ppl     1.01    2077.     814.
+##  9      10 lp__              1.00     388.     626.
+## 10      13 b_zoi_num_ppl     1.01    1733.     684.
+## 11      13 Intercept_coi     1.01    1583.     716.
+## 12      18 lp__              1.00     316.     522.
+## 13      19 b_zoi_Intercept   1.01    1726.     653.
+## 14      19 lp__              1.00     282.     496.
+## 15      20 lp__              1.00     384.     578.
+\end{verbatim}
+
+We see the pathological variables are either borderline acceptable
+(i.e.~rhat close enough to 1.01) or it is that is not of interest and is
+known to have difficult geometry for Hamiltonian Monte Carlo to sample
+from, namely lp\_\_.
+
+We can safely assume that the chains are converged well enough and we
+have enough sample size to make inference from.
+
+Now we proceed to check if our model is able to capture the distribution
+of scaled\_poverty\_index with simulation. Note that due to
+computational constraints, we only check for one imputed dataset.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{(}\ConstantTok{FALSE}\NormalTok{)\{}
+\FunctionTok{pp\_check}\NormalTok{(imp\_fit, }\AttributeTok{type =} \StringTok{"dens\_overlay"}\NormalTok{, }\AttributeTok{ndraws =} \DecValTok{500}\NormalTok{, }\FunctionTok{set.seed}\NormalTok{(}\DecValTok{555}\NormalTok{))}
+\FunctionTok{pp\_check}\NormalTok{(imp\_fit, }\AttributeTok{type =} \StringTok{"stat"}\NormalTok{, }\AttributeTok{stat =} \StringTok{"mean"}\NormalTok{, }\AttributeTok{ndraws =} \DecValTok{500}\NormalTok{, }\FunctionTok{set.seed}\NormalTok{(}\DecValTok{555}\NormalTok{))}
+\FunctionTok{pp\_check}\NormalTok{(imp\_fit, }\AttributeTok{type =} \StringTok{"ecdf\_overlay"}\NormalTok{, }\AttributeTok{ndraws =} \DecValTok{500}\NormalTok{, }\FunctionTok{set.seed}\NormalTok{(}\DecValTok{555}\NormalTok{))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Density overlay plot:}\label{density-overlay-plot}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"dens\_overlay plot.png"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=10.43in]{dens_overlay plot} \#\# Empirical
+cumulative distribution function plot
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"ecdf\_overlay plot.png"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=10.43in]{ecdf_overlay plot} \#\# Simulated mean
+statistic plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"mean\_stat plot.png"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=10.43in]{mean_stat plot}
+
+They are not too horrible if I do say so myself! Our model is able to
+capture the dynamic of the response distribution and the true mean falls
+in a probable region in our simulation.
+
+With these diagnostics, I am comfortable to say that our model has a
+pretty good fit.
+
+The following is the model summary for those who are interested:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{imp\_fit\_broom }\OtherTok{\textless{}{-}} \FunctionTok{tidyMCMC}\NormalTok{(imp\_fit, }\AttributeTok{conf.int =}\NormalTok{ T)}
+\FunctionTok{print}\NormalTok{(imp\_fit\_broom, }\AttributeTok{n =} \ConstantTok{Inf}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 29 x 5
+##    term             estimate std.error conf.low conf.high
+##    <chr>               <dbl>     <dbl>    <dbl>     <dbl>
+##  1 b_Intercept       -0.563    0.0931   -0.760    -0.387 
+##  2 b_phi_Intercept    1.49     0.142     1.24      1.75  
+##  3 b_zoi_Intercept   -1.80     0.279    -2.30     -1.21  
+##  4 b_coi_Intercept   -0.938    0.621    -2.22      0.227 
+##  5 b_num_ppl         -0.128    0.00902  -0.144    -0.109 
+##  6 b_HH_gender2      -0.193    0.0338   -0.256    -0.126 
+##  7 b_HH_age           0.139    0.0330    0.0808    0.208 
+##  8 b_HH_edu2          0.262    0.0523    0.161     0.355 
+##  9 b_HH_edu3          1.01     0.0829    0.795     1.15  
+## 10 b_phi_num_ppl      0.0940   0.0127    0.0692    0.118 
+## 11 b_phi_HH_gender2   0.0678   0.0555   -0.0390    0.174 
+## 12 b_phi_HH_age      -0.0898   0.0367   -0.166    -0.0193
+## 13 b_phi_HH_edu2     -0.187    0.0807   -0.346    -0.0498
+## 14 b_phi_HH_edu3     -0.377    0.0959   -0.558    -0.221 
+## 15 b_zoi_num_ppl     -0.193    0.0222   -0.238    -0.151 
+## 16 b_zoi_HH_gender2  -0.306    0.0905   -0.483    -0.131 
+## 17 b_zoi_HH_age       0.0923   0.0688   -0.0242    0.247 
+## 18 b_zoi_HH_edu2      0.232    0.191    -0.0922    0.650 
+## 19 b_zoi_HH_edu3      1.78     0.263     1.35      2.34  
+## 20 b_coi_num_ppl     -0.0715   0.0791   -0.228     0.0769
+## 21 b_coi_HH_gender2  -0.198    0.328    -0.743     0.625 
+## 22 b_coi_HH_age       0.864    0.202     0.510     1.25  
+## 23 b_coi_HH_edu2     -0.0918   0.318    -0.703     0.568 
+## 24 b_coi_HH_edu3      3.27     0.493     2.30      4.27  
+## 25 Intercept         -0.256    0.0123   -0.280    -0.232 
+## 26 Intercept_phi      1.38     0.0280    1.31      1.43  
+## 27 Intercept_zoi     -1.63     0.0480   -1.72     -1.54  
+## 28 Intercept_coi      1.97     0.126     1.74      2.24  
+## 29 lprior            -8.26     0.0908   -8.46     -8.10
+\end{verbatim}
+
+There is too much to go over so I only pick the effect of HH\_gender2
+(i.e.~the household reference person is female), HHage and HH\_edu3
+(i.e.~the household reference person is a college graduate or above) on
+μ and on coi.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{(}\ConstantTok{FALSE}\NormalTok{)\{}
+  \FunctionTok{mcmc\_areas}\NormalTok{(imp\_fit, }\AttributeTok{pars =} \FunctionTok{c}\NormalTok{(}\StringTok{"b\_HH\_age"}\NormalTok{, }\StringTok{"b\_coi\_HH\_age"}\NormalTok{,}
+                             \StringTok{"b\_HH\_gender2"}\NormalTok{,}\StringTok{"b\_coi\_HH\_gender2"}\NormalTok{,}
+                             \StringTok{"b\_HH\_edu3"}\NormalTok{, }\StringTok{"b\_coi\_HH\_edu3"}\NormalTok{),}
+            \AttributeTok{prob =} \FloatTok{0.95}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Posterior Distributions of selected model parameters"}\NormalTok{)}
+
+\NormalTok{\}}
+
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"Posterior Distributions of selected model parameters.png"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=10.43in]{Posterior Distributions of selected model parameters}
+
+So it can be interpreted that :
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The higher the age of the household reference person is, the higher
+  the scaled\_poverty\_ratio tends to be.
+\item
+  Households with female reference person tends to lower
+  scaled\_poverty\_ratio.
+\item
+  Households with reference person with college degrees or above tends
+  to higher scaled\_poverty ratio.
+\end{enumerate}
+
+It is also worth pointing out the posterior distribution of b\_HH\_edu3
+has a bi or even tri-modal skewed distribution that frequentist modeling
+would have failed to account as frequentist methods rely heavily on
+asymptotic distribution properties.
+
+\section{Sensitivity analysis on MAR
+assumption}\label{sensitivity-analysis-on-mar-assumption}
+
+We now have to face the worst nightmare that I have been avoiding. The
+MAR assumption we made earlier is necessary for justifying the validity
+of multiple imputation, but how can we be sure that this assumption is
+reasonable?
+
+Short answer, we can't, at least, not with statistics. We can only argue
+for MAR using domain knowledge which I lack (we can't have everything in
+life, can we?). And even more, I suspect respondents with lower
+proverty\_ratio are more likely to not answer possibly due to
+embarrassment, but it is just my two-cents.
+
+But we can simulate what would happen if it truly was missing NOT at
+random (MNAR) and there was a systemic bias? We can do this using the
+delta adjustment method. The idea is: What if we artificially add a bias
+term to missing value when we impute them?
+
+This can be achieved by the following code adapted from Stef Van Burren
+from his book ``Flexible Imputation of Missing Data'':
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Stef Van Burren code}
+\NormalTok{delta }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.5}\NormalTok{)}
+
+\NormalTok{post }\OtherTok{\textless{}{-}}\NormalTok{ ini}\SpecialCharTok{$}\NormalTok{post}
+\NormalTok{imp.all.undamped }\OtherTok{\textless{}{-}} \FunctionTok{vector}\NormalTok{(}\StringTok{"list"}\NormalTok{, }\FunctionTok{length}\NormalTok{(delta))}
+
+\ControlFlowTok{if}\NormalTok{(}\ConstantTok{FALSE}\NormalTok{)\{}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(delta)) \{}
+\NormalTok{  d }\OtherTok{\textless{}{-}}\NormalTok{ delta[i]}
+\NormalTok{  cmd }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\StringTok{"imp[[j]][,i] \textless{}{-} imp[[j]][,i] +"}\NormalTok{, d)}
+\NormalTok{  post[}\StringTok{"poverty\_index"}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ cmd}
+\NormalTok{  sens\_imp }\OtherTok{\textless{}{-}} \FunctionTok{mice}\NormalTok{(df,  }\AttributeTok{method =} \StringTok{"rf"}\NormalTok{, }\AttributeTok{m =} \DecValTok{3}\NormalTok{, }\AttributeTok{post =}\NormalTok{ post, }\AttributeTok{maxit =} \DecValTok{10}\NormalTok{,}
+              \AttributeTok{seed =} \DecValTok{555}\NormalTok{)}
+\NormalTok{  \}}
+  \FunctionTok{saveRDS}\NormalTok{(sens\_imp, }\StringTok{"sens\_imp.RDS"}\NormalTok{)}
+\NormalTok{\}}
+
+
+\NormalTok{sens\_imp }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{"sens\_imp.RDS"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Unfortunately, due to computational constraints (and my lack of
+patience), I am restricting to only one adjustment value and 3 imputed
+datasets. In a more rigorous setting, it is advisasble to test for more
+extreme values for delta and with more imputed datasets.
+
+But now, we should scale the data again to match the input and impose
+the lower bound of 0
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sens\_complete\_df }\OtherTok{\textless{}{-}} \FunctionTok{complete}\NormalTok{(sens\_imp, }\StringTok{"long"}\NormalTok{, }\AttributeTok{include =}\NormalTok{ T)}
+
+\NormalTok{sens\_complete\_df }\OtherTok{\textless{}{-}}\NormalTok{ sens\_complete\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{poverty\_index =} \FunctionTok{ifelse}\NormalTok{(.imp }\SpecialCharTok{!=} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ poverty\_index }\SpecialCharTok{\textless{}} \DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, poverty\_index))}
+
+\NormalTok{sens\_complete\_df }\OtherTok{\textless{}{-}}\NormalTok{ sens\_complete\_df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}
+  \AttributeTok{poverty\_index\_scaled =}\NormalTok{ poverty\_index }\SpecialCharTok{/} \DecValTok{5}\NormalTok{,}
+  \AttributeTok{HH\_edu =} \FunctionTok{as.factor}\NormalTok{(HH\_edu),}
+  \AttributeTok{HH\_gender =} \FunctionTok{as.factor}\NormalTok{(HH\_gender)}
+  \CommentTok{\# I am really paranoid about as.factor()}
+\NormalTok{)}
+
+\NormalTok{sens\_complete\_df }\OtherTok{\textless{}{-}} \FunctionTok{as.mids}\NormalTok{(sens\_complete\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+We can now fit a model again on this newly imputed dataset
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{(}\ConstantTok{FALSE}\NormalTok{)\{}
+\NormalTok{delta\_sens\_fit }\OtherTok{\textless{}{-}} \FunctionTok{brm\_multiple}\NormalTok{(formulas, }\AttributeTok{data =}\NormalTok{ sens\_complete\_df,}
+                       \AttributeTok{family =} \FunctionTok{zero\_one\_inflated\_beta}\NormalTok{(),}
+                        \AttributeTok{chains =} \DecValTok{4}\NormalTok{, }\AttributeTok{iter =} \DecValTok{2000}\NormalTok{, }\AttributeTok{cores =} \DecValTok{4}\NormalTok{,}
+                        \AttributeTok{seed =} \DecValTok{555}\NormalTok{)}
+
+\FunctionTok{saveRDS}\NormalTok{(delta\_sens\_fit, }\StringTok{"delta\_sens\_fit.RDS"}\NormalTok{)}
+\NormalTok{\}}
+
+\NormalTok{delta\_sens\_fit }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{"delta\_sens\_fit.RDS"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We can go through the diagnostics again but I don't want to bore you
+with details. I have checked, the chains converged.
+
+Then, we can compare the old models with our model fitted on adjusted
+data side by side to see if our conclusions would have changed given
+MNAR
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{imp\_fit\_broom }\OtherTok{\textless{}{-}} \FunctionTok{tidyMCMC}\NormalTok{(imp\_fit)}
+\NormalTok{imp\_fit\_renamed }\OtherTok{\textless{}{-}}\NormalTok{ imp\_fit\_broom }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rename\_with}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \FunctionTok{paste0}\NormalTok{(., }\StringTok{"\_imp"}\NormalTok{), }\SpecialCharTok{{-}}\NormalTok{term)}
+
+\NormalTok{delta\_sens\_fit\_broom }\OtherTok{\textless{}{-}} \FunctionTok{tidyMCMC}\NormalTok{(delta\_sens\_fit)}
+
+\NormalTok{delta\_sens\_fit\_renamed }\OtherTok{\textless{}{-}}\NormalTok{ delta\_sens\_fit\_broom }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rename\_with}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \FunctionTok{paste0}\NormalTok{(., }\StringTok{"\_delta\_sens"}\NormalTok{), }\SpecialCharTok{{-}}\NormalTok{term)}
+
+\NormalTok{combined\_table }\OtherTok{\textless{}{-}}\NormalTok{ imp\_fit\_renamed }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{left\_join}\NormalTok{(delta\_sens\_fit\_renamed, }\AttributeTok{by =} \StringTok{"term"}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(combined\_table, }\AttributeTok{n =} \ConstantTok{Inf}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 29 x 5
+##    term      estimate_imp std.error_imp estimate_delta_sens std.error_delta_sens
+##    <chr>            <dbl>         <dbl>               <dbl>                <dbl>
+##  1 b_Interc~      -0.563        0.0931              -0.791               0.0719 
+##  2 b_phi_In~       1.49         0.142                1.56                0.0914 
+##  3 b_zoi_In~      -1.80         0.279               -1.61                0.254  
+##  4 b_coi_In~      -0.938        0.621               -2.51                0.493  
+##  5 b_num_ppl      -0.128        0.00902             -0.128               0.00791
+##  6 b_HH_gen~      -0.193        0.0338              -0.219               0.0627 
+##  7 b_HH_age        0.139        0.0330               0.170               0.0378 
+##  8 b_HH_edu2       0.262        0.0523               0.361               0.0634 
+##  9 b_HH_edu3       1.01         0.0829               1.27                0.0542 
+## 10 b_phi_nu~       0.0940       0.0127               0.0687              0.00886
+## 11 b_phi_HH~       0.0678       0.0555               0.0820              0.0740 
+## 12 b_phi_HH~      -0.0898       0.0367              -0.123               0.0211 
+## 13 b_phi_HH~      -0.187        0.0807              -0.225               0.0557 
+## 14 b_phi_HH~      -0.377        0.0959              -0.337               0.0495 
+## 15 b_zoi_nu~      -0.193        0.0222              -0.163               0.0276 
+## 16 b_zoi_HH~      -0.306        0.0905              -0.264               0.0860 
+## 17 b_zoi_HH~       0.0923       0.0688               0.0587              0.0462 
+## 18 b_zoi_HH~       0.232        0.191               -0.0602              0.175  
+## 19 b_zoi_HH~       1.78         0.263                1.25                0.137  
+## 20 b_coi_nu~      -0.0715       0.0791              -0.255               0.0667 
+## 21 b_coi_HH~      -0.198        0.328               -0.308               0.198  
+## 22 b_coi_HH~       0.864        0.202                0.914               0.267  
+## 23 b_coi_HH~      -0.0918       0.318                1.20                0.412  
+## 24 b_coi_HH~       3.27         0.493                5.09                0.390  
+## 25 Intercept      -0.256        0.0123              -0.286               0.00988
+## 26 Intercep~       1.38         0.0280               1.30                0.0157 
+## 27 Intercep~      -1.63         0.0480              -1.75                0.0296 
+## 28 Intercep~       1.97         0.126                1.16                0.134  
+## 29 lprior         -8.26         0.0908              -7.80                0.0760
+\end{verbatim}
+
+We see the directions of the model parameters are consistent, implying
+that if the systemic bias was less than or equal to -0.5 on the unscaled
+poverty\_index, our conclusion will remain the same.
+
+Again, ideally we would explore more extreme bias, but HMC takes a long
+long time to run and I was getting grumpier and grumpier as it runs, so
+I will call it here.
+
+\section{Conclusion}\label{conclusion}
+
+In this project, I have performed Bayesian regression on the multiply
+imputed NHANES dataset with brms (and Stan underneath the hood) with
+diagnostics of HMC and the fit, as well as sensitivity analysis on the
+data missing mechanism. I am still working on my skills on summarizing a
+complex model and I am trying to perform data visualization better so
+pardon if it was not the best.
+
+But anyway this basically it for the project and below I will include my
+code at attempting to incorperate informative priors (that I made up).
+
+\section{Informative prior modeling (not relevant to the
+analysis)}\label{informative-prior-modeling-not-relevant-to-the-analysis}
+
+We first set the priors that I made up
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{priors }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FunctionTok{set\_prior}\NormalTok{(}\StringTok{"normal({-}1,5)"}\NormalTok{, }\AttributeTok{class =} \StringTok{"Intercept"}\NormalTok{, }\AttributeTok{dpar =} \StringTok{"mu"}\NormalTok{),}
+            \FunctionTok{set\_prior}\NormalTok{(}\StringTok{"normal({-}1,5)"}\NormalTok{, }\AttributeTok{class =} \StringTok{"Intercept"}\NormalTok{, }\AttributeTok{dpar =} \StringTok{"coi"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Then we use some of the imputed datasets to continue in order to cut
+down computation
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{partial\_complete\_df }\OtherTok{\textless{}{-}} \FunctionTok{subset\_datlist}\NormalTok{(}
+  \AttributeTok{datlist =} \FunctionTok{datlist\_create}\NormalTok{(complete\_df),  }
+  \AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{6}\NormalTok{)}
+\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{datlist2mids}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+And run HMC to fit the model
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{(}\ConstantTok{FALSE}\NormalTok{)\{}
+\NormalTok{prior\_sens\_fit }\OtherTok{\textless{}{-}} \FunctionTok{brm\_multiple}\NormalTok{(formulas, }\AttributeTok{data =}\NormalTok{ partial\_complete\_df,}
+                       \AttributeTok{family =} \FunctionTok{zero\_one\_inflated\_beta}\NormalTok{(),}
+                       \AttributeTok{prior =}\NormalTok{ priors,}
+                        \AttributeTok{chains =} \DecValTok{4}\NormalTok{, }\AttributeTok{iter =} \DecValTok{2000}\NormalTok{, }\AttributeTok{cores =} \DecValTok{4}\NormalTok{,}
+                        \AttributeTok{seed =} \DecValTok{555}\NormalTok{)}
+\FunctionTok{saveRDS}\NormalTok{(prior\_sens\_fit, }\StringTok{"prior\_sens\_fit.RDS"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Compare this with old model
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{imp\_fit\_broom }\OtherTok{\textless{}{-}} \FunctionTok{tidyMCMC}\NormalTok{(imp\_fit)}
+\NormalTok{prior\_sens\_fit }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{"prior\_sens\_fit.RDS"}\NormalTok{)}
+\NormalTok{sens\_fit\_broom }\OtherTok{\textless{}{-}} \FunctionTok{tidyMCMC}\NormalTok{(prior\_sens\_fit)}
+
+
+\NormalTok{imp\_fit\_renamed }\OtherTok{\textless{}{-}}\NormalTok{ imp\_fit\_broom }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rename\_with}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \FunctionTok{paste0}\NormalTok{(., }\StringTok{"\_imp"}\NormalTok{), }\SpecialCharTok{{-}}\NormalTok{term)}
+
+\NormalTok{sens\_fit\_renamed }\OtherTok{\textless{}{-}}\NormalTok{ sens\_fit\_broom }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rename\_with}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \FunctionTok{paste0}\NormalTok{(., }\StringTok{"\_sens"}\NormalTok{), }\SpecialCharTok{{-}}\NormalTok{term)}
+
+\NormalTok{combined\_table }\OtherTok{\textless{}{-}}\NormalTok{ imp\_fit\_renamed }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{left\_join}\NormalTok{(sens\_fit\_renamed, }\AttributeTok{by =} \StringTok{"term"}\NormalTok{)}
+
+
+\FunctionTok{print}\NormalTok{(combined\_table, }\AttributeTok{n =} \ConstantTok{Inf}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 29 x 5
+##    term             estimate_imp std.error_imp estimate_sens std.error_sens
+##    <chr>                   <dbl>         <dbl>         <dbl>          <dbl>
+##  1 b_Intercept           -0.563        0.0931        -0.504         0.110  
+##  2 b_phi_Intercept        1.49         0.142          1.48          0.155  
+##  3 b_zoi_Intercept       -1.80         0.279         -1.98          0.153  
+##  4 b_coi_Intercept       -0.938        0.621         -1.25          0.445  
+##  5 b_num_ppl             -0.128        0.00902       -0.134         0.00591
+##  6 b_HH_gender2          -0.193        0.0338        -0.181         0.0278 
+##  7 b_HH_age               0.139        0.0330         0.127         0.0173 
+##  8 b_HH_edu2              0.262        0.0523         0.250         0.0553 
+##  9 b_HH_edu3              1.01         0.0829         1.02          0.0838 
+## 10 b_phi_num_ppl          0.0940       0.0127         0.105         0.00928
+## 11 b_phi_HH_gender2       0.0678       0.0555         0.106         0.0293 
+## 12 b_phi_HH_age          -0.0898       0.0367        -0.101         0.0202 
+## 13 b_phi_HH_edu2         -0.187        0.0807        -0.218         0.102  
+## 14 b_phi_HH_edu3         -0.377        0.0959        -0.408         0.0942 
+## 15 b_zoi_num_ppl         -0.193        0.0222        -0.206         0.0203 
+## 16 b_zoi_HH_gender2      -0.306        0.0905        -0.278         0.131  
+## 17 b_zoi_HH_age           0.0923       0.0688         0.177         0.0699 
+## 18 b_zoi_HH_edu2          0.232        0.191          0.176         0.112  
+## 19 b_zoi_HH_edu3          1.78         0.263          1.83          0.161  
+## 20 b_coi_num_ppl         -0.0715       0.0791        -0.0282        0.0749 
+## 21 b_coi_HH_gender2      -0.198        0.328         -0.383         0.254  
+## 22 b_coi_HH_age           0.864        0.202          1.07          0.146  
+## 23 b_coi_HH_edu2         -0.0918       0.318         -0.393         0.250  
+## 24 b_coi_HH_edu3          3.27         0.493          3.33          0.359  
+## 25 Intercept             -0.256        0.0123        -0.248         0.00993
+## 26 Intercept_phi          1.38         0.0280         1.38          0.0290 
+## 27 Intercept_zoi         -1.63         0.0480        -1.65          0.0305 
+## 28 Intercept_coi          1.97         0.126          2.04          0.165  
+## 29 lprior                -8.26         0.0908        -9.36          0.0235
+\end{verbatim}
+
+The direction of the effect stays the same, but our prior isn't really
+that informative anyway
+
+\end{document}
