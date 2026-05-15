@@ -1,3 +1,4 @@
+<img width="751" height="516" alt="dens_overlay plot" src="https://github.com/user-attachments/assets/cbaa4d8d-f084-45d7-b5d6-c3128afd6fb2" />
 # Bayesian Regression on Poverty Income Ratio
 
 *Lui Yiu Wa — 2026-01-06*
