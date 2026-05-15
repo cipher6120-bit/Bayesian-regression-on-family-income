@@ -1,4 +1,3 @@
-<img width="751" height="516" alt="dens_overlay plot" src="https://github.com/user-attachments/assets/cbaa4d8d-f084-45d7-b5d6-c3128afd6fb2" />
 # Bayesian Regression on Poverty Income Ratio
 
 *Lui Yiu Wa — 2026-01-06*
@@ -194,15 +193,17 @@ if (FALSE) {
 
 **Density overlay** — comparing observed $y$ vs. simulated $y_{\text{rep}}$:
 
-![Density overlay posterior predictive check](https://raw.githubusercontent.com/cipher6120-bit/Bayesian-regression-on-family-income/main/dens_overlay-plot.jpg)
+<img width="751" height="516" alt="dens_overlay plot" src="https://github.com/user-attachments/assets/389a5531-d992-4b7d-bf0e-39cd262fc88f" />
 
 **Empirical CDF overlay:**
 
-![ECDF overlay posterior predictive check](https://raw.githubusercontent.com/cipher6120-bit/Bayesian-regression-on-family-income/main/ecdf_overlay-plot.jpg)
+<img width="751" height="510" alt="ecdf_overlay plot" src="https://github.com/user-attachments/assets/3105f343-f50e-45f3-88aa-4ba68bacb0be" />
+
 
 **Simulated mean statistic** — the true mean $T(y)$ falls comfortably within the predictive distribution $T(y_{\text{rep}})$:
 
-![Mean statistic posterior predictive check](https://raw.githubusercontent.com/cipher6120-bit/Bayesian-regression-on-family-income/main/mean_stat-plot.jpg)
+<img width="751" height="516" alt="mean_stat plot" src="https://github.com/user-attachments/assets/105a3b8e-1811-4ffb-b98b-f7b4b4914a5e" />
+
 
 Not too horrible if I do say so myself! The model captures the dynamic of the response distribution well.
 
@@ -244,7 +245,8 @@ if (FALSE) {
 }
 ```
 
-![Posterior Distributions of selected model parameters](https://raw.githubusercontent.com/cipher6120-bit/Bayesian-regression-on-family-income/main/Posterior-Distributions-of-selected-model-parameters.jpg)
+<img width="751" height="708" alt="Posterior Distributions of selected model parameters" src="https://github.com/user-attachments/assets/0daccff9-50e8-4c25-bb65-43e42ee5470b" />
+
 
 Key findings:
 
