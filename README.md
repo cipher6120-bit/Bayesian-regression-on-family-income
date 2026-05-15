@@ -193,15 +193,15 @@ if (FALSE) {
 
 **Density overlay** — comparing observed $y$ vs. simulated $y_{\text{rep}}$:
 
-![Density overlay posterior predictive check](dens_overlay-plot.jpg)
+![Density overlay posterior predictive check](https://raw.githubusercontent.com/cipher6120-bit/Bayesian-regression-on-family-income/main/dens_overlay-plot.jpg)
 
 **Empirical CDF overlay:**
 
-![ECDF overlay posterior predictive check](ecdf_overlay-plot.jpg)
+![ECDF overlay posterior predictive check](https://raw.githubusercontent.com/cipher6120-bit/Bayesian-regression-on-family-income/main/ecdf_overlay-plot.jpg)
 
 **Simulated mean statistic** — the true mean $T(y)$ falls comfortably within the predictive distribution $T(y_{\text{rep}})$:
 
-![Mean statistic posterior predictive check](mean_stat-plot.jpg)
+![Mean statistic posterior predictive check](https://raw.githubusercontent.com/cipher6120-bit/Bayesian-regression-on-family-income/main/mean_stat-plot.jpg)
 
 Not too horrible if I do say so myself! The model captures the dynamic of the response distribution well.
 
@@ -243,7 +243,7 @@ if (FALSE) {
 }
 ```
 
-![Posterior Distributions of selected model parameters](Posterior-Distributions-of-selected-model-parameters.jpg)
+![Posterior Distributions of selected model parameters](https://raw.githubusercontent.com/cipher6120-bit/Bayesian-regression-on-family-income/main/Posterior-Distributions-of-selected-model-parameters.jpg)
 
 Key findings:
 
