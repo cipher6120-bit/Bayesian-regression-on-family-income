@@ -97,6 +97,9 @@ complete_df <- complete(df_imp, "long", include = T)
 ```
 
 We can compare the distributions of `poverty_index` before and after imputation as a crude sanity check. They looked good — the imputed values were not very off.
+<img width="832" height="531" alt="plot1" src="https://github.com/user-attachments/assets/e3e935d8-35b9-4afb-a4c7-0b9b2bf64847" />
+<img width="832" height="531" alt="Plot2" src="https://github.com/user-attachments/assets/d977abc3-c7e7-401a-8e87-1dee266eb4d7" />
+
 
 ---
 
